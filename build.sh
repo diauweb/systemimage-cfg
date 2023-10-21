@@ -41,7 +41,7 @@ fi
 
 truncate -r .build/$FILE_NAME .build/$RESULT_NAME
 truncate -s $TRUNCATE_SIZE .build/$RESULT_NAME
-virt-resize --expand /dev/sda1 .build/$FILE_NAME .build/$RESULT_NAME
+virt-resize --expand $ROOTFS_PART .build/$FILE_NAME .build/$RESULT_NAME
 
 genisoimage -o .build/extra.iso -R -J -V EXTRA extra/
 virt-customize \
