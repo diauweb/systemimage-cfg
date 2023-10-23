@@ -51,4 +51,10 @@ virt-customize \
     --commands-from-file customize.cfg
 
 end_time=$(date +%s)
+
+# Make summary
+find . -type f -not -path "*/.build/*" -print0 | sort -z | xargs -0 sha256sum > .build/fingerprint
+sha256sum .build/$RESULT_NAME >> .build/fingerprint
+echo -e "\n$(date)" >> .build/fingerprint
+
 echo -e "\033[0;33mSaved the build artifact as $1/.build/$RESULT_NAME. Used time: $(($end_time - $start_time))s\033[0m"
